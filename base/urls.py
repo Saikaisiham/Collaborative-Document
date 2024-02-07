@@ -4,5 +4,5 @@ from .views import test , document_detail
 
 urlpatterns = [
     path('', test, name='test'),
-    path('doc/<int:file_id>/', document_detail, name='doc')
+    path('doc/<int:id>/', document_detail, name='doc')
 ]

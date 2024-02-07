@@ -19,3 +19,8 @@ def convert_odt_to_html(odt_path):
             print(element.firstChild.data)
             html_content.append('<p>' + element.firstChild.data + '</p>')
     return '\n'.join(html_content)
+
+
+
+
+
