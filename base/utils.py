@@ -14,5 +14,8 @@ def convert_odt_to_html(odt_path):
     doc = load(odt_path)
     html_content = []
     for element in doc.getElementsByType('text:p'):
-        html_content.append('<p>' + element.firstChild.data + '</p>')
+        print(element, element.firstChild)
+        if element.firstChild is not None:
+            print(element.firstChild.data)
+            html_content.append('<p>' + element.firstChild.data + '</p>')
     return '\n'.join(html_content)

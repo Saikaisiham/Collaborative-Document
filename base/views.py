@@ -32,9 +32,9 @@ def test(request):
 
 def document_detail(request, file_id):
     uploaded_file = get_object_or_404(UploadedDocument, pk=file_id)
-    if uploaded_file.document.name.endswith('.odt'):
-        file_content = convert_odt_to_html(uploaded_file.document.path)
+    if uploaded_file.file.name.endswith('.odt'):
+        file_content = convert_odt_to_html(uploaded_file.file.path)
     else:
-        with open(uploaded_file.document.path, 'r') as file:
+        with open(uploaded_file.file.path, 'r') as file:
             file_content = file.read()
     return render(request, 'base/document_detail.html', {'file_content': file_content})
