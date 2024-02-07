@@ -11,6 +11,9 @@ from django.shortcuts import get_object_or_404
 import zipfile
 from io import BytesIO
 import chardet
+import mimetypes
+import docx
+import os
 
 @login_required
 def test(request):
@@ -21,11 +24,6 @@ def test(request):
             document = form.save(commit=False)
             document.user = user
             document.save()
-            
-            # docx_content = document.document.read()
-            # doc = Document(io.BytesIO(docx_content))
-            # html_content = render_to_string('document_detail.html', {'doc': doc})
-            # return HttpResponse(html_content)
             return redirect('/', file_id=document.id)
     else:
         form = DocumentUploadForm()
@@ -33,25 +31,41 @@ def test(request):
     return render(request, 'base/test.html', {'form': form})
 
 
-# def document_detail(request, file_id):
-#     uploaded_file = get_object_or_404(UploadedDocument, pk=file_id)
-#     if uploaded_file.file.name.endswith('.odt'):
-#         file_content = convert_odt_to_html(uploaded_file.file.path)
-#     else:
-#         with open(uploaded_file.file.path, 'r') as file:
-#             file_content = file.read()
-#     return render(request, 'base/document_detail.html', {'file_content': file_content})
+
 
 
 def document_detail(request, id):
     uploaded_file = get_object_or_404(UploadedDocument, id=id)
     
+    file_path = uploaded_file.file.path
+    
+    if os.access(file_path, os.R_OK):
+        print("File is readable.")
+    else:
+        print("File is not readable.")
+    mime_type, _ = mimetypes.guess_type(file_path)
 
-    with uploaded_file.file.open('rb') as file_content:
-        file_binary = file_content.read()
-    
-    encoding_info = chardet.detect(file_binary)
-    encoding = encoding_info['encoding']
-    
-    file_content_decoded = file_binary.decode('latin-1')
-    return render(request, 'base/document_detail.html', {'file_content_decoded': file_content_decoded})
+    try:
+        doc = docx.Document(file_path)
+        content = "\n".join([paragraph.text for paragraph in doc.paragraphs])
+    except Exception as e:
+        content = "Error occurred while reading the Word document: {}".format(str(e))
+
+    if mime_type == 'application/vnd.openxmlformats-officedocument.wordprocessingml.document':
+
+        try:
+            doc = docx.Document(file_path)
+            content = "\n".join([paragraph.text for paragraph in doc.paragraphs])
+        except Exception as e:
+            content = "Error occurred while reading the Word document: {}".format(str(e))
+    else:
+
+        with open(file_path, 'rb') as file:
+            file_content = file.read()
+
+        if mime_type and mime_type.startswith('text'):
+            content = file_content.decode('utf-8')
+        else: 
+            content = "Can't decode the file. Mime type: {}".format(mime_type)
+
+    return render(request, 'base/document_detail.html', {'content': content})
