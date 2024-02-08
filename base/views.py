@@ -22,7 +22,8 @@ def test(request):
             document = form.save(commit=False)
             document.user = user
             document.save()
-            return redirect('/', file_id=document.id)
+            # print(request.POST)
+            return redirect('/')
     else:
         form = DocumentUploadForm()
 

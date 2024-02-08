@@ -10,4 +10,4 @@ class MyForm(forms.Form):
 class DocumentUploadForm(forms.ModelForm):
     class Meta:
         model = UploadedDocument
-        fields = ['file']
+        fields = ['file', 'test_field']
