@@ -1,3 +1,8 @@
+import chardet
+import mimetypes
+import docx
+import os
+import zipfile
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from .models import UploadedDocument
@@ -5,15 +10,8 @@ from .forms import DocumentUploadForm
 from django.contrib.auth.decorators import login_required
 from django.template.loader import render_to_string
 from docx import Document
-import io
-from .utils import convert_odt_to_html
 from django.shortcuts import get_object_or_404
-import zipfile
 from io import BytesIO
-import chardet
-import mimetypes
-import docx
-import os
 
 @login_required
 def test(request):
