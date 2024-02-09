@@ -1,16 +1,19 @@
-<title>Profile</title>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Profile</title>
+</head>
+<body>
+    <h2>Edit Your Profile</h2>
 
+    {% if error_message %}
+        <p>{{ error_message }}</p>
+    {% endif %}
 
-<h2>Edit Your Profile</h2>
-
-<form action="" method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Submit</button>
-</form>
-
-<br>
-
-
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Submit</button>
+    </form>
 </body>
 </html>

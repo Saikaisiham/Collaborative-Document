@@ -24,7 +24,7 @@ def register_request(request):
             username = form.cleaned_data.get('username')
             email = form.cleaned_data.get('email')
             messages.success(request, f'Your account has been created ! You are now able to log in')
-            return redirect('user/profile')
+            return redirect('/user/profile')
         
     else:
         form = UserRegisterForm()
@@ -58,12 +58,12 @@ def profile(request):
                 profile.user = request.user
                 profile.save()
                 print(request.POST) 
-                return redirect('user/profile')  
+                return redirect('/user/profile')  
             else:
                 return HttpResponseNotAllowed('User not authenticated. Please log in.')  
         else:
-            form_url = reverse('user/profile')  
-            return HttpResponseNotAllowed(f'Form submission invalid. Please check your inputs. <a href="{form_url}">Go back to the form</a>')  
-    else:
-        return HttpResponseNotFound('Page not found. Please check the URL.')  
 
+            return render(request, 'user/profile.html', {'form': form, 'error_message': 'Form submission invalid. Please check your inputs.'})
+    else:
+        form = ProfileForm()
+        return render(request, 'user/profile.html', {'form': form})

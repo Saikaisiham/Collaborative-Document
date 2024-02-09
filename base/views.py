@@ -14,7 +14,7 @@ from django.shortcuts import get_object_or_404
 from io import BytesIO
 
 @login_required
-def test(request):
+def base(request):
     if request.method == 'POST':
         form = DocumentUploadForm(request.POST, request.FILES)
         if form.is_valid():
