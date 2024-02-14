@@ -13,6 +13,7 @@ from django.urls import reverse
 
 
 def index(request):
+    
     return render(request, 'user/index.html', {'title':'index'})
 
 
@@ -43,7 +44,7 @@ def login_request(request):
             messages.success(request, f' welcome {username} !!')
             return redirect('/')
         else:
-            messages.info(request, f'account done not exit plz sign in')
+            messages.info(request, f'account done not exit please sign in')
     form = AuthenticationForm()
     return render(request, 'user/login.html', {'form':form, 'title':'log in'})
 
