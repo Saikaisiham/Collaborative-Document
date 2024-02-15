@@ -4,17 +4,14 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 from .forms import UserRegisterForm, ProfileForm
-from django.core.mail import send_mail
-from django.core.mail import EmailMultiAlternatives
-from django.template.loader import get_template
-from django.template import Context
 from django.http import HttpResponseNotAllowed, HttpResponseNotFound
-from django.urls import reverse
+from django.contrib.auth import logout
+from .models import Profile
 
-
-def index(request):
-    
-    return render(request, 'user/index.html', {'title':'index'})
+@login_required
+def index(request): 
+    profile = Profile.objects.get(user=request.user) 
+    return render(request, 'user/index.html', {'title':'index', 'profile':profile})
 
 
 def register_request(request):
@@ -53,18 +50,24 @@ def login_request(request):
 def profile(request):
     if request.method == 'POST':
         form = ProfileForm(request.POST, request.FILES)
+        print("Files:", request.FILES)  
         if form.is_valid():
             if request.user.is_authenticated:
                 profile = form.save(commit=False)
                 profile.user = request.user
                 profile.save()
-                print(request.POST) 
-                return redirect('/user/profile')  
+                print("Profile saved:", profile)  
+                return redirect('/user/index')
             else:
-                return HttpResponseNotAllowed('User not authenticated. Please log in.')  
+                return HttpResponseNotAllowed('User not authenticated. Please log in.')
         else:
-
+            print("Form errors:", form.errors)  
             return render(request, 'user/profile.html', {'form': form, 'error_message': 'Form submission invalid. Please check your inputs.'})
     else:
         form = ProfileForm()
         return render(request, 'user/profile.html', {'form': form})
+    
+
+def logout_request(request):
+    logout(request)
+    return redirect('/') 

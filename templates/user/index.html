@@ -1,25 +1,28 @@
+{% extends 'navbar.html' %}
 {% load bootstrap5 %}
 {% load static %}
+{% block content %}
 <link rel="stylesheet" href="{% static 'CSS/style.css' %}">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 <div class="container mt-4 mb-4 p-3 d-flex justify-content-center">
     <div class="card p-4">
         <div class="image d-flex flex-column justify-content-center align-items-center">
-            <button class="btn btn-secondary">
-                <img src="{{ request.user.photo }}" height="100" width="100" />
+            <button class="btn ">
+                <img src="{{ profile.photo.url }}" height="100" width="100" />
             </button>
-            <span class="name mt-3">{{ request.user.first_name }} {{ request.user.last_name }}</span>
-            <span class="idd">@{{ request.user.username }}</span>
+            <span class="name mt-3">{{ profile.first_name }} {{ profile.last_name }}</span>
+            <span class="idd">@{{ user.username }}</span>
             <div class="d-flex mt-2">
                 <button class="btn1 btn-dark">Edit Profile</button>
             </div>
             <div class="text mt-3">
-                <span>{{ request.user.bio }}</span>
+                <span>{{ profile.bio }}</span>
             </div>
 
             <div class="px-2 rounded mt-4 date">
-                <span class="join">{{ request.user.created_at }}</span>
+                <span class="join">{{ profile.created_at }}</span>
             </div>
         </div>
     </div>
 </div>
+{% endblock content %}

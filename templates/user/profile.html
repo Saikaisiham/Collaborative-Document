@@ -1,19 +1,60 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Profile</title>
-</head>
-<body>
-    <h2>Edit Your Profile</h2>
+{% load static %}
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+<link rel="stylesheet" href="{% static 'CSS/style2.css' %}">
+<title>Profile</title>
 
-    {% if error_message %}
-        <p>{{ error_message }}</p>
-    {% endif %}
 
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Submit</button>
-    </form>
-</body>
-</html>
+
+
+
+<div class="content-section col-md-8 col-md-offset-2">
+<form method="POST" enctype="multipart/form-data">
+	{% csrf_token %}
+	<section >
+  <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+    <div class="container h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+          <div class="card" style="border-radius: 15px;">
+            <div class="card-body p-5">
+              <h2 class="text-uppercase text-center mb-5">Edit Your Profile</h2>
+
+              <form>
+
+                <div class="form-outline mb-4">
+					<label class="form-label" for="form3Example1cg">Upload your photo</label><br>
+					{{form.photo}}
+                </div>
+
+				<div class="form-outline mb-4">
+					<label class="form-label" for="form3Example1cg">Bio</label><br>
+					{{form.bio}}
+                </div>
+
+
+				<div class="form-outline mb-4">
+                  
+                  <label class="form-label" for="form3Example1cg">Gender</label><br>
+				  {{form.gender}}
+                </div>
+
+                <div class="d-flex justify-content-center">
+                  <button type="submit"
+                    class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Submit</button>
+                </div>
+              </form>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+	
+</form>
+</div>
+
+

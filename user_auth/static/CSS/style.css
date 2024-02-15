@@ -26,7 +26,10 @@ body {
 .btn {
     height: 140px;
     width: 140px;
-    border-radius: 50%
+    border-radius: 50%;
+    background-color: #e9b1bd; /* Light pink button */
+    color: #fff; /* White text */
+    border-color: #e9b1bd; /* Light pink border */
 }
 
 .name {
@@ -58,8 +61,9 @@ body {
     height: 40px;
     width: 150px;
     border: none;
-    background-color: #000;
-    color: #aeaeae;
+    background-color: #e9b1bd; /* Light pink button */
+    color: #fff; /* White text */
+    border-color: #e9b1bd;
     font-size: 15px
 }
 
@@ -85,4 +89,8 @@ hr .new1 {
 
 .date {
     background-color: #ccc
+}
+
+.btn {
+    
 }

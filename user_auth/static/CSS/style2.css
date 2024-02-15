@@ -1,0 +1,11 @@
+
+
+    .btn {
+        background-color: #e9b1bd; /* Light pink button */
+        color: #fff; /* White text */
+        border-color: #e9b1bd; /* Light pink border */
+    }
+    .btn:hover {
+        background-color: #d98ca3; /* Darker pink on hover */
+        border-color: #d98ca3; /* Darker pink border on hover */
+    }
