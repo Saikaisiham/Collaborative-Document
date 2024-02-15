@@ -1,6 +1,7 @@
 from django.db import models
 from ckeditor.fields import RichTextField
 from ckeditor_uploader.fields import RichTextUploadingField
+from django.contrib.auth.models import User
 
 class UploadedDocument(models.Model):
     user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
@@ -10,3 +11,7 @@ class UploadedDocument(models.Model):
 
     def __str__(self):
         return self.file.name
+    
+    def add_participant_by_username(self, username):
+        user = User.objects.get(username=username)
+        self.participants.add(user)

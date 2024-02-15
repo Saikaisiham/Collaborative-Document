@@ -1,0 +1,20 @@
+body {
+  background-color: #f8f9fa; /* Light gray background */
+}
+.custom-container {
+  border-radius: 15px; /* Rounded corners */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Shadow effect */
+  padding: 20px; /* Padding inside the container */
+  background-color: #ffffff; /* White background */
+}
+.form-control {
+  border-color: #e9b1bd; /* Light pink border */
+}
+.btn-pink {
+  background-color: #e9b1bd; /* Light pink button */
+  color: #fff; /* White text */
+  border-color: #e9b1bd; /* Light pink border */
+}
+.btn-pink:hover {
+  background-color: #d98ca3; /* Darker pink on hover */
+  border-color: #d98ca3; /* Darker pink border on hover */

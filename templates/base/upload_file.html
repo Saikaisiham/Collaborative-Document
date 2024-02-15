@@ -1,0 +1,73 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'CSS/styles.css' %}">
+    <script src="{% static 'ckeditor/ckeditor-init.js' %}"></script>
+    <script src="{% static 'ckeditor/ckeditor/ckeditor.js' %}"></script>
+
+    <title>Document Upload</title>
+    
+    <style>
+        body {
+            background-color: #f8f9fa; /* Light gray background */
+        }
+        .custom-container {
+            border-radius: 15px; /* Rounded corners */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Shadow effect */
+            padding: 20px; /* Padding inside the container */
+            background-color: #ffffff; /* White background */
+        }
+        .form-control {
+            border-color: #e9b1bd; /* Light pink border */
+        }
+        .btn-pink {
+            background-color: #e9b1bd; /* Light pink button */
+            color: #fff; /* White text */
+            border-color: #e9b1bd; /* Light pink border */
+        }
+        .btn-pink:hover {
+            background-color: #d98ca3; /* Darker pink on hover */
+            border-color: #d98ca3; /* Darker pink border on hover */
+        }
+    </style>
+</head>
+<body>
+
+<div class="container mt-5">
+    {% if user.is_authenticated %}
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="custom-container">
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="btn btn-pink mt-3">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="custom-container">
+                <p class="text-center">Please login to upload a document.</p>
+                <div class="text-center">
+                    <a href="" class="btn btn-pink">Register</a>
+                    <a href="" class="btn btn-pink">Login</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>
