@@ -15,6 +15,7 @@ from io import BytesIO
 from django.contrib.auth.models import User
 
 
+
 def base(request):
     if request.method == 'POST':
         form = DocumentUploadForm(request.POST, request.FILES)

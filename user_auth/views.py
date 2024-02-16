@@ -6,7 +6,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from .forms import UserRegisterForm, ProfileForm
 from django.http import HttpResponseNotAllowed, HttpResponseNotFound
 from django.contrib.auth import logout
-from .models import Profile
+from .models import Profile, Notification
 
 @login_required
 def index(request): 
@@ -71,3 +71,9 @@ def profile(request):
 def logout_request(request):
     logout(request)
     return redirect('/') 
+
+
+def notifications_view(request):
+    user_notifications = Notification.objects.filter(user=request.user)
+    notification_count = user_notifications.count()
+    return render(request, 'user/index.html', {'notifications': user_notifications})
