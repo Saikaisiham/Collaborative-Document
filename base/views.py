@@ -25,9 +25,9 @@ def base(request):
             document.user = user
             document.save()
 
-            usernames = form.cleaned_data.get('participant_usernames', [])
-            participants = User.objects.filter(username__in=usernames)
-            document.participants.add(*participants)
+            # usernames = form.cleaned_data.get('participants')
+            # participants = User.objects.filter(username__in=usernames)
+            # document.participants.add(*participants)
             print(document.id)
             return redirect('/')
     else:

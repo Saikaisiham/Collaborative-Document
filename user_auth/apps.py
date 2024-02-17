@@ -6,4 +6,4 @@ class UserAuthConfig(AppConfig):
     name = 'user_auth'
 
     def ready(self) -> None:
-        import user_auth.signals
+        from . import signals

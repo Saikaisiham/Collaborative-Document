@@ -21,10 +21,12 @@
                             </span></a>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Notifications <span class="badge bg-secondary">{{ notification_count }}</span>
-{% if notification_count == 0 %}
-    <p>No notifications</p>
-{% endif %} <span class="badge bg-secondary">{{ notification_count }}</span>
+                                    Notifications 
+                                    <span class="badge bg-secondary">{{ notification_count }}</span>
+                                        {% if notification_count == 0 %}
+                                            <p>No notifications</p>
+                                        {% endif %} 
+                                    <span class="badge bg-secondary">{{ notification_count }}</span>
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     {% for notification in notifications %}

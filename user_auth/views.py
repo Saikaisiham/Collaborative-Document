@@ -7,6 +7,7 @@ from .forms import UserRegisterForm, ProfileForm
 from django.http import HttpResponseNotAllowed, HttpResponseNotFound
 from django.contrib.auth import logout
 from .models import Profile, Notification
+from base.models import UploadedDocument
 
 @login_required
 def index(request): 
@@ -76,4 +77,6 @@ def logout_request(request):
 def notifications_view(request):
     user_notifications = Notification.objects.filter(user=request.user)
     notification_count = user_notifications.count()
-    return render(request, 'user/index.html', {'notifications': user_notifications})
+    test = UploadedDocument.objects.filter(user=request.user)
+    print("Context:", {'notifications': user_notifications, 'tests': test})
+    return render(request, 'user/index.html', {'notifications': user_notifications, 'tests':test})
